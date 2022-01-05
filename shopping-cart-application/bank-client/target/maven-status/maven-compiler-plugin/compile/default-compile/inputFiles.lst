@@ -1,0 +1,10 @@
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/TransactionReplyMessage.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/CreditCard.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/TransactionRequestMessage.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/client/BankRestClient.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/BankTransaction.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/BankTransactionStatus.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/User.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/model/dto/BankAccount.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/bank/client/impl/BankRestClientImpl.java
+/home/parallels/Dev/com528_ae2/shopping-cart-application/bank-client/src/main/java/org/solent/com504/oodd/password/PasswordUtils.java
