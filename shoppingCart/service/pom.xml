@@ -14,8 +14,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>solent.ac.uk.ood.examples</groupId>
-            <artifactId>webApplicationExercise2-model</artifactId>
+            <groupId>solent.ac.uk.ood.ae2</groupId>
+            <artifactId>shoppingCart-model</artifactId>
             <version>${project.version}</version>
         </dependency>
 
