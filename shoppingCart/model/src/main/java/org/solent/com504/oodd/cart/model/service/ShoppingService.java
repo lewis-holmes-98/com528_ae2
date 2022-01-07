@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author cgallen
+ * @author 4holml09
  */
 public interface ShoppingService {
     

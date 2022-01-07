@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>solent.ac.uk.ood.examples</groupId>
-        <artifactId>webApplicationExercise2-answer</artifactId>
+        <groupId>solent.ac.uk.ood.ae2</groupId>
+        <artifactId>shoppingCart</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webApplicationExercise2-web</artifactId>
+    <artifactId>shoppingCart-web</artifactId>
     <packaging>war</packaging>
-    <name>webApplicationExercise2-web</name>
+    <name>shoppingCart-web</name>
     
     <properties>
         <!-- You can copy and paste the single properties, into the pom.xml file and the Netbeans will pick them up. -->
@@ -117,4 +117,5 @@
       
         </plugins>
     </build>
+    <groupId>solent.ac.uk.ood.ae2</groupId>
 </project>

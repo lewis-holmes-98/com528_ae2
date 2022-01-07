@@ -13,7 +13,7 @@ import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 
 /**
  *
- * @author cgallen
+ * @author 4holml09
  */
 public class ShoppingCartImpl implements ShoppingCart {
 

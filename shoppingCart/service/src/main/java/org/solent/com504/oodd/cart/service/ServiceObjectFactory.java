@@ -10,7 +10,7 @@ import org.solent.com504.oodd.cart.model.service.ShoppingService;
 
 /**
  *
- * @author cgallen
+ * @author 4holml09
  */
 public class ServiceObjectFactory {
     

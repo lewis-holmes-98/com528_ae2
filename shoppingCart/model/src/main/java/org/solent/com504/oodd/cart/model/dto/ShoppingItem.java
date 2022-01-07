@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  *
- * @author cgallen
+ * @author 4holml09
  */
 public class ShoppingItem {
     

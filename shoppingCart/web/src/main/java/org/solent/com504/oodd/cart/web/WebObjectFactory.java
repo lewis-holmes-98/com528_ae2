@@ -13,7 +13,7 @@ import org.solent.com504.oodd.cart.service.ServiceObjectFactory;
 
 /**
  *
- * @author cgallen
+ * @author 4holmes09
  */
 public class WebObjectFactory {
 

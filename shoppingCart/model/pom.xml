@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>solent.ac.uk.ood.examples</groupId>
-        <artifactId>webApplicationExercise2-answer</artifactId>
+        <groupId>solent.ac.uk.ood.ae2</groupId>
+        <artifactId>shoppingCart</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>webApplicationExercise2-model</artifactId>
+    <artifactId>shoppingCart-model</artifactId>
     <packaging>jar</packaging>
     
     <dependencies>
@@ -54,5 +54,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-      
+    <name>shoppingCart-model</name>
+    <groupId>solent.ac.uk.ood.ae2</groupId>
 </project>
