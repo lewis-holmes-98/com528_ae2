@@ -11,6 +11,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import static org.junit.Assert.*;
 import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 import org.solent.com504.oodd.cart.model.service.ShoppingCart;
@@ -21,7 +23,9 @@ import org.solent.com504.oodd.cart.service.ServiceObjectFactory;
  * @author cgallen
  */
 public class ShoppingCartTest {
-
+    
+    final static Logger LOG = LogManager.getLogger(ShoppingCartTest.class);
+    
     ShoppingCart shoppingCart = null;
 
     @Before

@@ -6,6 +6,8 @@
 package org.solent.com504.oodd.cart.spring.web;
 
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.solent.com504.oodd.cart.dao.impl.ShoppingItemCatalogRepository;
 import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 import org.solent.com504.oodd.cart.model.dto.User;
@@ -27,6 +29,8 @@ import org.springframework.ui.Model;
 @RequestMapping("/")
 public class productController {
 
+    final static Logger LOG = LogManager.getLogger(MVCController.class);
+
     @Autowired
     ShoppingService shoppingService = null;
 
@@ -43,6 +47,7 @@ public class productController {
             sessionUser.setUsername("anonymous");
             sessionUser.setUserRole(UserRole.ANONYMOUS);
             session.setAttribute("sessionUser", sessionUser);
+            LOG.info("Session created" + sessionUser);
         }
         return sessionUser;
     }
@@ -61,12 +66,12 @@ public class productController {
         model.addAttribute("sessionUser", sessionUser);
 
         if (!UserRole.ADMINISTRATOR.equals(sessionUser.getUserRole())) {
-            errorMessage = "You do have permission to view";
+            errorMessage = "ACCESS DENIED - Administrator privileges required.";
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("availableItems", shoppingService.getAvailableItems());
             model.addAttribute("shoppingCartItems", shoppingCart.getShoppingCartItems());
             model.addAttribute("shoppingcartTotal", shoppingCart.getTotal());
-
+            LOG.warn(errorMessage);
             return "home";
         }
 
@@ -107,12 +112,12 @@ public class productController {
         model.addAttribute("sessionUser", sessionUser);
 
         if (!UserRole.ADMINISTRATOR.equals(sessionUser.getUserRole())) {
-            errorMessage = "You do not have permission to view this page, Administrator required.";
+            errorMessage = "ACCESS DENIED - Administrator privileges required.";
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("availableItems", shoppingService.getAvailableItems());
             model.addAttribute("shoppingCartItems", shoppingCart.getShoppingCartItems());
             model.addAttribute("shoppingcartTotal", shoppingCart.getTotal());
-
+            LOG.warn(errorMessage);
             return "home";
         }
 
@@ -120,6 +125,7 @@ public class productController {
             model.addAttribute("errorMessage", "Cant update item with no name");
             model.addAttribute("editItem", itemRepository.findItemByName(currentItemName));
             model.addAttribute("selectedPage", "admin");
+            LOG.warn(errorMessage);
             return "editItem";
         }
 
@@ -136,13 +142,14 @@ public class productController {
             itemRepository.deleteById(editItem.getId());
             shoppingCart.removeItemFromCart(editItem.getUuid());
             model.addAttribute("availableItems", shoppingService.getAvailableItems());
-//        LOG.info("Item " + name + " deleted");
+            LOG.info(editItem.getName() + " deleted");
             model.addAttribute("selectedPage", "admin");
             return "viewCatalog";
         }
 
         if (price != null) {
             editItem.setPrice(price);
+            LOG.info("Price updated" + price);
         }
 
         for (ShoppingItem i : shoppingCart.getShoppingCartItems()) {
@@ -156,5 +163,41 @@ public class productController {
         model.addAttribute("editItem", editItem);
         return "editItem";
 
+    }
+
+    @RequestMapping(value = {"/createItem"}, method = RequestMethod.POST)
+    public String createItem(
+            @RequestParam(value = "currentName", required = false) String currentName,
+            @RequestParam(value = "price", required = false) Double price,
+            @RequestParam(value = "stock", required = false) Integer stock,
+            Model model,
+            HttpSession session
+    ) {
+        String message = "";
+        String errorMessage = "";
+        User sessionUser = getSessionUser(session);
+        model.addAttribute("sessionUser", sessionUser);
+        model.addAttribute("selectedPage", "createItem");
+
+        if (!UserRole.ADMINISTRATOR.equals(sessionUser.getUserRole())) {
+            errorMessage = "ACCESS DENIED - Administrator privileges required.";
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("availableItems", shoppingService.getAvailableItems());
+            model.addAttribute("shoppingCartItems", shoppingCart.getShoppingCartItems());
+            model.addAttribute("shoppingcartTotal", shoppingCart.getTotal());
+            LOG.warn(errorMessage);
+            return "home";
+        }
+        
+        for (ShoppingItem n : itemRepository.findAll()) {
+            if (n.getName().equals(currentName)) {
+                errorMessage = "Error" + currentName + " already exists";
+                LOG.warn(errorMessage);
+                model.addAttribute("errorMessage", errorMessage);
+                return "createItem";
+            }
+        }
+        
+        return "home";
     }
 }

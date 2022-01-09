@@ -71,15 +71,6 @@ public class MVCController {
         String message = "";
         String errorMessage = "";
 
-        // note that the shopping cart is is stored in the sessionUser's session
-        // so there is one cart per sessionUser
-//        ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingCart");
-//        if (shoppingCart == null) synchronized (this) {
-//            if (shoppingCart == null) {
-//                shoppingCart = WebObjectFactory.getNewShoppingCart();
-//                session.setAttribute("shoppingCart", shoppingCart);
-//            }
-//        }
         if (action == null) {
             // do nothing but show page
         } else if ("addItemToCart".equals(action)) {
@@ -148,16 +139,15 @@ public class MVCController {
             model.addAttribute("availableItems", shoppingService.getAvailableItems());
             model.addAttribute("shoppingCartItems", shoppingCart.getShoppingCartItems());
             model.addAttribute("shoppingcartTotal", shoppingCart.getTotal());
-            
+            LOG.warn(errorMessage);
             return "home";
         }
         
         model.addAttribute("availableItems", shoppingService.getAvailableItems());
         model.addAttribute("selectedPage", "admin");
+        LOG.info("Catalog opened successfully");
         return "viewCatalog";
     }
-    
-    
     
     /*
      * Default exception handler, catches all exceptions, redirects to friendly
@@ -177,8 +167,8 @@ public class MVCController {
         model.addAttribute("requestUrl", urlStr);
         model.addAttribute("strStackTrace", strStackTrace);
         model.addAttribute("exception", e);
-        //logger.error(strStackTrace); // send to logger first
-        return "error"; // default friendly exception message for sessionUser
+        LOG.error(strStackTrace);
+        return "error";
     }
 
 }
