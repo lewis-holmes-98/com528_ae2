@@ -24,10 +24,10 @@
     <div style="color:red;">${errorMessage}</div>
     <div style="color:green;">${message}</div>
 
-<!--    <form action="./searchCatalog" method="GET">
-        <input name="name" input="text" placeholder="Search by name" value="${searchedValue}">
-        <button class="btn" type="submit" >Search</button>
-    </form> -->
+    <!--    <form action="./searchCatalog" method="GET">
+            <input name="name" input="text" placeholder="Search by name" value="${searchedValue}">
+            <button class="btn" type="submit" >Search</button>
+        </form> -->
 
     <table class="table">
         <thead>
@@ -48,9 +48,11 @@
                         <!-- post avoids url encoded parameters -->
                         <form action="./editItem" method="GET">
                             <input type="hidden" name="itemName" value="${item.name}">
-                            <button class="btn" type="submit" >Modify Item</button>
+                            <input type="hidden" name="itemPrice" value="${item.price}">
+                            <button class="btn" type="submit" >Edit</button>
                         </form> 
                     </td>
+                    
                 </tr>
             </c:forEach>
         </tbody>

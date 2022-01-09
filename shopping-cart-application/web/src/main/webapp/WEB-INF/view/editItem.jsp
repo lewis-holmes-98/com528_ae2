@@ -28,11 +28,22 @@
                         <td>Name</td>
                         <td><input type="text" required name="updateName" value="${editItem.name}"></td>
                     </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="number" required name="price" value="${editItem.price}"></td>
+                    </tr>
                 </tbody>
             </table>
             <input type="hidden" name="currentUuid" value="${editItem.uuid}">
             <input type="hidden" name="currentName" value="${editItem.name}">
             <button class="btn" type="submit">Update</button>
+            
+            <form action="./viewCatalog" method="POST">
+                <input type="hidden" name="action" value="delete"/>
+                <input type="hidden" name="name" value="${modifyItem.name}"/>
+                <input type="hidden" name="uuid" value="${modifyItem.uuid}"/>
+                <button class="btn" type="submit" >Delete</button>
+            </form>
 
         </form>
     </body>
