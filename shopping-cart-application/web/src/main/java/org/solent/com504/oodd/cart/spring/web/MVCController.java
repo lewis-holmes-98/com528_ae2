@@ -1,4 +1,4 @@
-package org.solent.com504.oodd.cart.spring.web;
+ package org.solent.com504.oodd.cart.spring.web;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -136,8 +136,29 @@ public class MVCController {
         model.addAttribute("selectedPage", "contact");
         return "contact";
     }
-
-
+    
+    @RequestMapping(value = "/viewCatalog", method = {RequestMethod.GET, RequestMethod.POST})
+    public String itemCatalog(Model model, HttpSession session) {
+         // get sessionUser from session
+        User sessionUser = getSessionUser(session);
+        model.addAttribute("sessionUser", sessionUser);
+        if (!UserRole.ADMINISTRATOR.equals(sessionUser.getUserRole())) {
+            String errorMessage = "You do have permission to view";
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("availableItems", shoppingService.getAvailableItems());
+            model.addAttribute("shoppingCartItems", shoppingCart.getShoppingCartItems());
+            model.addAttribute("shoppingcartTotal", shoppingCart.getTotal());
+            
+            return "home";
+        }
+        
+        model.addAttribute("availableItems", shoppingService.getAvailableItems());
+        model.addAttribute("selectedPage", "admin");
+        return "viewCatalog";
+    }
+    
+    
+    
     /*
      * Default exception handler, catches all exceptions, redirects to friendly
      * error page. Does not catch request mapping errors

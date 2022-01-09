@@ -76,6 +76,9 @@
             <td>${shoppingcartTotal}</td>
         </tr>
     </table>
+    
+     <a href="./checkout"> Proceed to Checkout </a>
+ 
 
 
 
