@@ -70,6 +70,5 @@ public class ShoppingCartImpl implements ShoppingCart {
 
         return total;
 
-    }
-
+    } 
 }

@@ -10,40 +10,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import org.solent.com504.oodd.cart.dao.impl.ShoppingItemCatalogRepository;
 import org.solent.com504.oodd.cart.model.service.ShoppingCart;
 import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 import org.solent.com504.oodd.cart.model.service.ShoppingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author cgallen
+ * @author ISA0600247
  */
 
+@Component
 public class ShoppingServiceImpl implements ShoppingService {
-
-    // note ConcurrentHashMap instead of HashMap if map can be altered while being read
-    private Map<String, ShoppingItem> itemMap = new ConcurrentHashMap<String, ShoppingItem>();
-
-    private List<ShoppingItem> itemlist = Arrays.asList(new ShoppingItem("house", 20000.00),
-            new ShoppingItem("hen", 5.00),
-            new ShoppingItem("car", 5000.00),
-            new ShoppingItem("pet alligator", 65.00)
-    );
-
+    
+    @Autowired
+    private ShoppingItemCatalogRepository shoppingItemCatalogRepository;
+    
+    
     public ShoppingServiceImpl() {
 
-        // initialised the hashmap
-        for (ShoppingItem item : itemlist) {
-            itemMap.put(item.getName(), item);
-        }
     }
-
+    
     @Override
     public List<ShoppingItem> getAvailableItems() {
-        return itemlist;
+        return shoppingItemCatalogRepository.findAll();
     }
 
-    @Override
+   
     public boolean purchaseItems(ShoppingCart shoppingCart) {
         System.out.println("purchased items");
         for (ShoppingItem shoppingItem : shoppingCart.getShoppingCartItems()) {
@@ -55,12 +51,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public ShoppingItem getNewItemByName(String name) {
-        ShoppingItem templateItem = itemMap.get(name);
-        
-        if(templateItem==null) return null;
-        
+        ShoppingItem templateItem = shoppingItemCatalogRepository.findItemByName(name);       
+        if(templateItem==null) return null;        
         ShoppingItem item = new ShoppingItem();
-        item.setName(name);
+        item.setName(templateItem.getName());
         item.setPrice(templateItem.getPrice());
         item.setQuantity(0);
         item.setUuid(UUID.randomUUID().toString());

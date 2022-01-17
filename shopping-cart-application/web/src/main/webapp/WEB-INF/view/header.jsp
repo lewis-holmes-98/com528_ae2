@@ -1,8 +1,3 @@
-<%-- 
-    Document   : header
-    Created on : Jan 4, 2020, 11:19:01 AM
-    Author     : cgallen
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -17,7 +12,7 @@
         <link rel="icon" href="../../favicon.ico">
         <!--<link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/navbar/">-->
 
-        <title>Navbar Template for Bootstrap</title>
+
 
         <!-- Bootstrap core CSS -->
         <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +36,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Project name</a>
+                        <a class="navbar-brand" href="./home">COM528 Shopping App</a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -53,7 +48,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Admin <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="./users">Manage Users</a></li>
-                                        <li><a href="./catalog">Manage Catalogue</a></li>
+                                        <li><a href="./viewCatalog">Manage Catalogue</a></li>
+                                        <li><a href="./invoices">Manage Invoices</a></li>
                                     </ul>
                                 </li>
                             </c:if>
@@ -69,12 +65,23 @@
                                 <form id="profile" method="GET" action="./viewModifyUser">
                                     <input type="hidden" name="username" value="${sessionUser.username}"/>
                                 </form>
+                                <form id="invoiceUser" method="GET" action="./viewInvoiceUser">
+                                    <input type="hidden" name="username" value="${sessionUser.username}"/>
+                                </form>
                                 <p class="text-muted"> Welcome 
                                     <c:if test="${sessionUser.userRole =='ADMINISTRATOR'}"> Admin</c:if>                                   
                                     ${sessionUser.username}&nbsp;&nbsp;
                                     <a onclick="document.forms['logoutForm'].submit()">Logout</a><BR>
                                     <a onclick="document.forms['profile'].submit()">User Profile</a></p>
                                 </c:if>
+                                <c:if test="${sessionUser.userRole =='CUSTOMER'}">
+                                <li class="dropdown" >
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Where To? <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./viewInvoiceUser">Your Orders</a></li>
+                                    </ul>
+                                </li>
+                            </c:if>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
