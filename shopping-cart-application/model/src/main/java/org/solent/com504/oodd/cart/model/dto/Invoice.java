@@ -14,6 +14,8 @@ public class Invoice {
 
     private Long id;
 
+    private String uuid = null;
+
     private String invoiceNumber;
 
     private Date dateOfPurchase;
@@ -23,6 +25,8 @@ public class Invoice {
     private List<ShoppingItem> purchasedItems;
 
     private User purchaser;
+    
+    private InvoiceState state;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +36,14 @@ public class Invoice {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getInvoiceNumber() {
@@ -74,6 +86,14 @@ public class Invoice {
 
     public void setPurchaser(User purchaser) {
         this.purchaser = purchaser;
+    }
+    
+    public InvoiceState getState() {
+        return state;
+    }
+    
+    public void setState(InvoiceState state) {
+        this.state = state;
     }
 
 }

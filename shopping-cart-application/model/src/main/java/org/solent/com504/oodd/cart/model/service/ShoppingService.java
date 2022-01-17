@@ -7,11 +7,14 @@ package org.solent.com504.oodd.cart.model.service;
 
 import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author cgallen
+ * @author ISA06002471
  */
+@Component
 public interface ShoppingService {
     
         public List<ShoppingItem> getAvailableItems();

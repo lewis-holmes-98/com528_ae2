@@ -15,17 +15,21 @@ import org.solent.com504.oodd.cart.model.service.ShoppingCart;
 import org.solent.com504.oodd.cart.model.dto.ShoppingItem;
 import org.solent.com504.oodd.cart.model.service.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author cgallen
+ * @author ISA0600247
  */
 
+@Component
 public class ShoppingServiceImpl implements ShoppingService {
     
     @Autowired
     private ShoppingItemCatalogRepository shoppingItemCatalogRepository;
-
+    
+    
     public ShoppingServiceImpl() {
 
     }
@@ -35,7 +39,7 @@ public class ShoppingServiceImpl implements ShoppingService {
         return shoppingItemCatalogRepository.findAll();
     }
 
-    @Override
+   
     public boolean purchaseItems(ShoppingCart shoppingCart) {
         System.out.println("purchased items");
         for (ShoppingItem shoppingItem : shoppingCart.getShoppingCartItems()) {
@@ -47,12 +51,10 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public ShoppingItem getNewItemByName(String name) {
-        ShoppingItem templateItem = shoppingItemCatalogRepository.findItemByName(name);
-        
-        if(templateItem==null) return null;
-        
+        ShoppingItem templateItem = shoppingItemCatalogRepository.findItemByName(name);       
+        if(templateItem==null) return null;        
         ShoppingItem item = new ShoppingItem();
-        item.setName(name);
+        item.setName(templateItem.getName());
         item.setPrice(templateItem.getPrice());
         item.setQuantity(0);
         item.setUuid(UUID.randomUUID().toString());

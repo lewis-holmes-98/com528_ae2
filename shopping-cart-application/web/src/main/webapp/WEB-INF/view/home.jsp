@@ -75,12 +75,15 @@
             <td>TOTAL</td>
             <td>${shoppingcartTotal}</td>
         </tr>
+        
+        <tr>
+            <form action="./home" method="post">
+                    <input type="hidden" name="cart" value="${shoppingCartItems}">
+                    <input type="hidden" name="action" value="purchaseItems">
+                    <button type="submit" >Buy Now!</button>
+            </form>
+        </tr>
     </table>
-    
-     <a href="./checkout"> Proceed to Checkout </a>
- 
-
-
 
 </main>
 <jsp:include page="footer.jsp" />
